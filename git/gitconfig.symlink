@@ -1,0 +1,27 @@
+[user]
+	name = GIT_AUTHOR_NAME
+	email = GIT_AUTHOR_EMAIL
+[color]
+	ui = auto
+[diff]
+	renames = copies
+	mnemonicprefix = true
+[branch]
+	autosetupmerge = true
+	autosetuprebase = always
+[push]
+	default = tracking
+[rerere]
+	enabled = true
+[merge]
+	stat = true
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	cp = cherry-pick
+	st = status -s
+	cl = clone
+	df = diff --word-diff
+	dc = diff --cached
