@@ -13,6 +13,6 @@ then
 fi
 
 # Install homebrew packages
-brew install tig git jq maven wget
+brew install tig git jq maven wget node ack
 
 exit 0
