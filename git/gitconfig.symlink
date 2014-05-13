@@ -25,3 +25,4 @@
 	cl = clone
 	df = diff --word-diff
 	dc = diff --cached
+	undo = reset --soft HEAD^
