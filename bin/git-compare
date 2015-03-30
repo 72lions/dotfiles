@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+
+import subprocess
+
+URL_BASE = "https://github.com/"
+URL_MID = "/compare/"
+URL_END = "?expand=1"
+
+try:
+	status = subprocess.check_output(["git", "status", "--porcelain", "-b"], stderr=subprocess.STDOUT);
+except subprocess.CalledProcessError:
+	exit("fatal: Not a git repository")
+
+local_branch = ""
+remote_branch = ""
+
+for line in status.splitlines():
+	if line.startswith("##"):
+		branches_output = line.replace("#", "").strip().split("...")
+		local_branch = branches_output[0]
+		remote_branch = branches_output[1]
+		break
+
+remote_branch_parts = remote_branch.split("/", 1)
+remote = remote_branch_parts[0]
+remote_branch_without_remote = remote_branch_parts[1]
+
+target = ""
+remotes = subprocess.check_output(["git", "remote", "-v"]);
+for line in remotes.splitlines():
+	if line.startswith(remote) and line.endswith("(fetch)"):
+		target = line.split(":")[1].split(".git")[0]
+		break
+
+
+url_parts = [URL_BASE, target, URL_MID, remote_branch_without_remote, URL_END]
+url = "".join(url_parts)
+subprocess.call(["open", url]);
