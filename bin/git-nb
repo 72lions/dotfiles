@@ -1,0 +1,21 @@
+#!/usr/bin/python
+import sys, os, subprocess, getpass
+from datetime import datetime
+
+if len(sys.argv) > 1:
+	prefix = sys.argv[1]
+else:
+	prefix = getpass.getuser()
+
+
+if len(sys.argv) > 2:
+	suffix = sys.argv[2]
+else:
+	suffix = str(datetime.now().strftime("%b-%d/%H%M")).lower()
+
+branchName = prefix + "/" + suffix;
+
+
+
+args = ['git','checkout','-b{}'.format(branchName)];
+proc = subprocess.Popen(args,stdout=subprocess.PIPE).stdout.readlines()
